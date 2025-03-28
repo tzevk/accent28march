@@ -85,16 +85,16 @@ const Sidebar = () => {
         {isLeadsPath && (
           <>
             <div
-              className={`${styles.navItem} ${pathname === "/leads/clients" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/leads/clients")}
+              className={`${styles.navItem} ${pathname === "/clients" ? styles.active : ""}`}
+              onClick={() => safeNavigate("/clients")}
             >
               <UserPlus size={20} className={styles.icon} />
               <span>All Clients</span>
             </div>
 
             <div
-              className={`${styles.navItem} ${pathname === "/leads/clients/addClient" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/leads/clients/addClient")}
+              className={`${styles.navItem} ${pathname === "/clients/add" ? styles.active : ""}`}
+              onClick={() => safeNavigate("/clients/add")}
             >
               <UserPlus size={20} className={styles.icon} />
               <span>Add Client</span>

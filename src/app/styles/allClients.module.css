@@ -1,0 +1,158 @@
+/* All Clients Page Layout */
+.clientsPage {
+  display: flex;
+  height: 100vh;
+}
+
+.mainContent {
+    margin-left: 260px;
+    padding: 20px;
+    width: 100px;
+    background: #f9f9f9;
+    min-height: 100vh;
+    min-width: 89vw;
+    overflow-y: auto;
+  }
+
+/* Header with icon */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #6A0DAD;
+}
+
+/* Card container for the table */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.table thead {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f1ff;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  height: 80%;
+  margin-top: 70px;
+  margin-left: 13%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  color: #6A0DAD;
+  margin-bottom: 20px;
+  text-align: left; /* Align title to the left */
+}
+
+.formSection {
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.formSection h4 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #6A0DAD;
+  text-align: left; /* Align section titles to the left */
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  gap: 20px;
+}
+
+.formGrid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.formGrid input,
+.formGrid select,
+.formGrid textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+
+
+
+
+.textarea {
+  resize: none;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.buttonRow button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.buttonRow button[type="submit"] {
+  background-color: #6A0DAD;
+  color: white;
+}
+
+.buttonRow button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+}
