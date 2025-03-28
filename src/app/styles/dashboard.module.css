@@ -1,0 +1,313 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    overflow-y: auto; 
+  }
+  
+  .content {
+    margin-left: 260px;
+    padding: 20px;
+    width: 100px;
+    background: #f9f9f9;
+    min-height: 100vh;
+    min-width: 89vw;
+    overflow-y: auto;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .filterContainer {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .tableContainer {
+    border-radius: 2px;
+    box-shadow: 0px 4px 8px rgba(33, 33, 33, 0.1);
+  }
+  
+  .dashboardTable {
+    width: 80vw;
+    border-collapse: collapse;
+  }
+  
+  .dashboardTable th,
+  .dashboardTable td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .dashboardTable thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .todoContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 81vw;;
+    height: 5000px;
+    max-height: fit-content;
+    grid-column: span 1;
+    grid-row: span 2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
+  
+  .todoTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6A0DAD;
+    margin-bottom: 10px;
+  }
+  
+  .todoList {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .taskItem {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .noTasks {
+    font-size: 0.95rem;
+    color: gray;
+  }
+  
+  .widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 13px;
+    margin-top: 20px;
+  }
+  
+  
+  .widgetCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .todoContainer {
+    grid-column: span 2; 
+    height: 400px; 
+    overflow-y: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  .chartsContainer {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .widgetCard {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .widgetCard2 {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 500px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .widgetCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .widgetTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6A0DAD;
+    margin-bottom: 15px;
+  }
+  
+  .chartsContainer .widgetCard {
+    width: 500px;
+    height: 300px;
+  }
+  
+  .paymentBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .paymentItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .paymentLabel {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .paymentValue {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .customerSatisfactionChart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  
+  .keyMetrics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .metricCard {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    flex: 1;
+    margin-right: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .metricCard:last-child {
+    margin-right: 0;
+  }
+  
+  .metricCard:hover {
+    transform: translateY(-3px);
+  }
+  
+  .metricTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .metricValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .filterTabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 1 20px;
+  }
+  
+  .filterTab {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .filterTab:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .activeTab {
+    background-color: #6A0DAD;
+    color: #fff;
+    border-color: #6A0DAD;
+    font-weight: bold;
+  }
+  
+  
+  .projectList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .projectItem {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .projectItemEven {
+    background-color: #fafafa;
+  }
+  
+  .projectItem:hover {
+    background-color: #f3f3f3;
+  }
+  
+  .projectName {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  
+  .projectStatus {
+    font-size: 0.85rem;
+    color: #6A0DAD;       
+    background-color: #f9f1ff; 
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  } 
+   
