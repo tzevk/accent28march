@@ -1,0 +1,340 @@
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Scrollable Table */
+.scrollableTable {
+  width: 100%;
+  max-height: 560px;
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+/* Leads Table */
+.dashboardTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dashboardTable thead {
+  background-color: #f0f0f5;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.dashboardTable th {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #6A0DAD;
+  background-color: #f9f9fc;
+}
+
+.dashboardTable tbody tr {
+  transition: background-color 0.2s ease;
+  min-height: 50px;
+}
+
+.dashboardTable tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.dashboardTable tbody tr:hover {
+  background-color: #e6f2ff;
+}
+
+.dashboardTable td {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Action Buttons inside cells */
+.dashboardTable td button {
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.dashboardTable td button:hover {
+  opacity: 0.85;
+}
+
+/* Main Content Area */
+.content {
+  margin-left: 260px;
+  padding: 20px;
+  width: 100px;
+  background: #f9f9f9;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-y: auto;
+}
+
+/* Title Styling */
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+  color: #86288f;
+}
+
+/* Filter and Search Bar */
+.filterContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 81vw;
+  padding: 15px;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(33, 33, 33, 0.1);
+  gap: 15px;
+  border-radius: 6px;
+}
+
+.filterDropdown {
+  flex: 1;
+  max-width: 200px;
+  padding: 10px;
+  border: 1px solid #0d6efd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #0d6efd;
+  background: white;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.clearButton {
+  background: #f0f0f0;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+}
+
+.clearButton:hover {
+  background: #e0e0e0;
+}
+
+.totalInquiry {
+  font-size: 1rem;
+  color: gray;
+  margin-left: auto;
+}
+
+.searchButton {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: #218838;
+}
+
+/* Search Input */
+.searchInput {
+  flex: 1 !important;
+  width: 90vw !important;
+  padding: 10px !important;
+  border: 1.5px solid #0d6efd !important;
+  border-radius: 4px !important;
+  font-size: 1rem;
+  color: #0d6efd;
+}
+
+.searchInput::placeholder {
+  color: #0d6efd;
+  opacity: 0.6;
+}
+
+.searchInput:focus {
+  border-color: #0a58ca;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+
+/* Table Container */
+.tableContainer {
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px rgba(33, 33, 33, 0.1);
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  width: 81vw;
+  overflow-x: auto;
+  height: 600px;
+  overflow: auto;
+}
+
+/* Add Inquiry Button */
+.addButton {
+  background-color: #86288f;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #218838;
+}
+
+
+
+/* Modal Styles */
+.modal {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modal Content */
+.modalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Title */
+.modalTitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #86288f79;
+}
+
+/* Form Styling */
+.modalForm input,
+.modalForm textarea,
+.modalForm select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modalForm input:focus,
+.modalForm textarea:focus,
+.modalForm select:focus {
+  border: 1px solid #4A148C;
+  box-shadow: 0px 0px 5px rgba(74, 20, 140, 0.3);
+}
+
+.modalForm textarea {
+  resize: none;
+  height: 80px;
+}
+/* Action Buttons Container */
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  justify-content: center;
+  width: 58;
+  gap: 5px;
+
+}
+
+/* Edit Button */
+.editButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editButton:hover {
+  background-color: #28a745;
+}
+
+/* Delete Button */
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #b71c1c;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 0;
+    min-width: 100vw;
+  }
+
+  .filterContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .filterDropdown,
+  .searchInput,
+  .buttonContainer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardTable th,
+  .dashboardTable td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
