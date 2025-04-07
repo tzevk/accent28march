@@ -310,4 +310,187 @@
     border-radius: 4px;
     font-weight: 500;
   } 
-   
+ 
+  .outreachButtonContainer {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    margin-bottom: 1rem;
+  }
+  
+  .outreachToggleButton {
+    background-color: #6A0DAD;
+    margin-top: 15px;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+  }
+  
+  .outreachToggleButton:hover {
+    background-color: #4b0082;
+  }
+
+  .outreachTableWrapper {
+    margin-top: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1.5rem;
+    width: 1220px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-height: 500px;
+    overflow: hidden;
+  }
+  
+  .outreachTitle {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #6A0DAD;
+    margin-bottom: 1rem;
+  }
+  
+  .tableContainer {
+    width: 100%;
+    position: relative;
+  }
+  
+  .scrollBody {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  
+  .outreachTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .outreachTable thead {
+    background-color: #f5ebff;
+  }
+  
+  .outreachTable th {
+    color: #4b0082;
+    font-size: 1rem;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #e2d8f7;
+    position: sticky;
+    top: 0;
+    background: #f5ebff;
+    z-index: 1;
+  }
+  
+  .outreachTable td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    color: #333;
+    vertical-align: top;
+  }
+  
+  .outreachTable tr:hover {
+    background-color: #f9f5ff;
+  }
+  
+  .noData {
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+    color: #888;
+  }
+
+  .outreachTable {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  
+  .outreachTable th,
+  .outreachTable td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.95rem;
+  }
+  
+  .outreachTable thead th {
+    background-color: #f4e9ff;
+    color: #4b0082;
+    font-weight: 600;
+  }
+  
+  .outreachTable tbody tr:hover {
+    background-color: #faf5ff;
+  }
+  
+  /* Fixed width for columns */
+  .outreachTable th:nth-child(1),
+  .outreachTable td:nth-child(1) {
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+  }
+  
+  .outreachTable th:nth-child(2),
+  .outreachTable td:nth-child(2) {
+    width: 20%;
+    white-space: nowrap;
+  }
+  
+  .outreachTable th:nth-child(3),
+  .outreachTable td:nth-child(3) {
+    width: 55%;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .scrollBody {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .scrollBody table {
+    table-layout: fixed;
+  }
+
+  .outreachTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .outreachTable thead {
+    background-color: #f4eaff;
+    color: #4b0082;
+    text-align: left;
+  }
+  
+  .outreachTable th,
+  .outreachTable td {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0; /* horizontal borders */
+    border-right: 1px solid #e0e0e0;  /* vertical borders */
+  }
+  
+  .outreachTable th:last-child,
+  .outreachTable td:last-child {
+    border-right: none; /* remove last column border */
+  }
+  
+  .outreachTable tr:last-child td {
+    border-bottom: none; /* remove last row border */
+  }

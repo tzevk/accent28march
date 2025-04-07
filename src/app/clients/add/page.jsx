@@ -38,15 +38,15 @@ export default function AddClientPage() {
         </div>
 
         <div className={styles.tabControls}>
-          {["personal", "branches", "followup"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={activeTab === tab ? styles.activeTab : ""}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+        {["personal", "branches", "followup"].map((tab) => (
+  <button
+    key={tab}
+    onClick={() => setActiveTab(tab)}
+    className={activeTab === tab ? styles.activeTab : ""}
+  >
+    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+  </button>
+))}
           <button type="submit" form="clientForm">
             Save
           </button>
