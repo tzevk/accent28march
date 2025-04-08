@@ -10,6 +10,8 @@ export default function AddClientPage() {
   const [activeTab, setActiveTab] = useState("personal");
   const [formData, setFormData] = useState({});
 
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -22,9 +24,12 @@ export default function AddClientPage() {
       if (response.status === 201) {
         alert("Client added successfully");
         setFormData({});
+      } else {
+        console.error("Unexpected status:", response.status, response.data);
+        alert("Something went wrong while saving the client.");
       }
     } catch (error) {
-      console.error("Error adding client:", error);
+      console.error("🚨 Axios error:", error);
       alert("Something went wrong while saving the client.");
     }
   };
