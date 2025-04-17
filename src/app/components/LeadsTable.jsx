@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import styles from "../styles/leads.module.css";
 import axios from "axios";
 import LeadModal from "../components/LeadModal";
-import AddOptionModal from "../components/AddOptionModal";
 import AddInquiryModal from "../components/AddInquiryModal";
 import { useRouter } from "next/navigation";
 
@@ -123,7 +122,7 @@ const LeadsTable = () => {
   
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get("/api/companies");
+        const res = await axios.get("/api/leads/companies");
         setCompanies(res.data);
       } catch (err) {
         console.error("Failed to fetch companies", err);
@@ -179,10 +178,14 @@ const LeadsTable = () => {
         </div>
   
         <AddInquiryModal
-          show={showOptionModal}
-          onSelect={handleOptionSelect}
-          onCancel={() => setShowOptionModal(false)}
-        />
+  show={showOptionModal}
+  onSelect={handleOptionSelect}
+  onCancel={() => setShowOptionModal(false)}
+  onSuccess={() => {
+    fetchLeads();              // Refetch leads after adding
+    setShowOptionModal(false); // Close modal
+  }}
+/>
   
         <LeadModal
           show={showModal}

@@ -64,13 +64,6 @@ const Sidebar = () => {
               <span>Projects</span>
             </div>
 
-            <div
-              className={`${styles.navItem} ${pathname === "/help" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/help")}
-            >
-              <HelpCircle size={20} className={styles.icon} />
-              <span>Help</span>
-            </div>
 
             <div
               className={`${styles.navItem} ${pathname === "/settings" ? styles.active : ""}`}

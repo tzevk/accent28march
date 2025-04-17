@@ -1,5 +1,4 @@
 import clientPromise from "../../lib/mongodb";
-
 export async function GET() {
   try {
     const client = await clientPromise;
@@ -7,10 +6,13 @@ export async function GET() {
     const collection = db.collection("Lead_Data");
 
     const companies = await collection
-      .find({}, { projection: { _id: 0, company_name: 1 } })
+      .find({ company_name: { $ne: null } }, { projection: { _id: 0, company_name: 1 } })
       .toArray();
 
-    return Response.json(companies);
+    return new Response(JSON.stringify(companies), {
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
   } catch (error) {
     console.error("Error fetching companies:", error);
     return new Response(
