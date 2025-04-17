@@ -51,36 +51,6 @@ button, input[type=submit] {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Signup Button */
-.signup-btn {
-  background: rgba(255, 255, 255, 0.3);
-  color: #3a0d47;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease-in-out;
-}
-
-.signup-btn:hover {
-  background: rgba(255, 255, 255, 0.4);
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-.button:hover {
-  border-color: var(--dark-accent);
-}
-
-.mainContent {
-  transition: margin-left 0.3s ease;
-  padding: 20px;
-  padding-top: 60px;
-}
-
-.mainContent.expanded {
-  margin-left: 260px;
-}
-
-.mainContent.collapsed {
-  margin-left: 80px;
-}
 
 body {
   padding: 0;
@@ -216,11 +186,43 @@ a:hover {
   text-align: left; /* â† this is key to override center */
 }
 
+select {
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 30px;
+  border: 2px solid var(--primary);
+  background-color: transparent;
+  outline: none;
+  font-size: 15px;
+  width: 350px;
+  color: var(--font-color);
+  text-align: left;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%2364126D" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+select:focus {
+  border-color: var(--dark-accent);
+}
+
 /* Title */
 .glass-card h2 {
   font-size: 24px;
   margin-bottom: 10px;
   font-weight: bold;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .red {
