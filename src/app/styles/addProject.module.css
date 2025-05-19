@@ -1,0 +1,125 @@
+.clientsPage {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem 2.5rem;
+}
+
+.contentArea {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Tab Controls */
+.tabControls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tabControls button {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  background: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabControls button:hover {
+  background: #e2e2e2;
+}
+
+.activeTab {
+  background: #7b2cbf;
+  color: white;
+  border-color: #7b2cbf;
+}
+
+/* Form Styling */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formSection {
+  margin-bottom: 2rem;
+}
+
+.formSection h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #5a189a;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.formGrid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.formGrid input,
+.formGrid select {
+  margin-top: 0.5rem;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s ease-in-out;
+}
+
+.formGrid input:focus,
+.formGrid select:focus {
+  border-color: #7b2cbf;
+  outline: none;
+}
+
+/* Save/Cancel Button Row */
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.buttonRow button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.buttonRow button[type='submit'] {
+  background-color: #7b2cbf;
+  color: white;
+}
+
+.buttonRow button[type='submit']:hover {
+  background-color: #5a189a;
+}
+
+.buttonRow button[type='button'] {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.buttonRow button[type='button']:hover {
+  background-color: #e0e0e0;
+}

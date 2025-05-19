@@ -287,6 +287,55 @@
   color: #86288f79;
 }
 
+.pillDropdown {
+  border: 2px solid #7b2cbf;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #7b2cbf;
+  background-color: white;
+  outline: none;
+  min-width: 200px;
+}
+
+.pillDropdown:focus {
+  border-color: #5a189a;
+  box-shadow: 0 0 0 2px rgba(122, 44, 191, 0.2);
+}
+
+.pillAddButton {
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  height: fit-content;
+  cursor: pointer;
+  margin-top: -4px; /* vertically align with selects */
+  transition: background-color 0.2s ease;
+}
+
+.pillAddButton:hover {
+  background-color: #5a189a;
+}
+
+.pillSearchInput {
+  border: 2px solid #7b2cbf;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #7b2cbf;
+  background-color: white;
+  flex: 1;
+  min-width: 200px;
+}
+
+.pillSearchInput::placeholder {
+  color: #7b2cbf;
+  opacity: 0.6;
+}
+
 /* Form Styling */
 .modalForm input,
 .modalForm textarea,

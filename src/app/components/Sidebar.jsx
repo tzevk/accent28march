@@ -2,22 +2,22 @@
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import link from "next/link";
+import { useState } from "react";
+import { ChevronDown, ChevronRight, Shield, Settings, Share2, Layers, Clock } from "lucide-react";
 import {
   Home,
   BarChart,
   ShoppingCart,
-  HelpCircle,
-  Settings,
   LogOut,
   Users,
   UserPlus,
-  FileText,
 } from "lucide-react";
 import styles from "../styles/sidebar.module.css";
 
 const Sidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const isUserManagementPath = pathname.startsWith("/users") || pathname.startsWith("/roles") || pathname.startsWith("/profiles") || pathname.startsWith("/sharing") || pathname.startsWith("/groups") || pathname.startsWith("/login-history");
 
   const isLeadsPath = pathname.startsWith("/leads");
   const isProjectsPath = pathname.startsWith("/projects");
@@ -64,14 +64,6 @@ const Sidebar = () => {
               <span>Projects</span>
             </div>
 
-
-            <div
-              className={`${styles.navItem} ${pathname === "/settings" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/settings")}
-            >
-              <Settings size={20} className={styles.icon} />
-              <span>Settings</span>
-            </div>
           </>
         )}
 
@@ -93,43 +85,117 @@ const Sidebar = () => {
               <span>Add Client</span>
             </div>
 
-            <div
-              className={`${styles.navItem} ${pathname === "/leads/reports/sales" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/leads/reports/sales")}
-            >
-              <FileText size={20} className={styles.icon} />
-              <span>Sales Report</span>
-            </div>
-
-            <div
-              className={`${styles.navItem} ${pathname === "/leads/reports/users" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/leads/reports/users")}
-            >
-              <FileText size={20} className={styles.icon} />
-              <span>User Report</span>
-            </div>
-
             <div className={styles.navItem} onClick={() => safeNavigate("/dashboard")}>
               ← Back to Main
             </div>
           </>
         )}
 
-        {isProjectsPath && (
-          <>
-            <div
-              className={`${styles.navItem} ${pathname === "/projects" ? styles.active : ""}`}
-              onClick={() => safeNavigate("/projects")}
-            >
-              <ShoppingCart size={20} className={styles.icon} />
-              <span>All Projects</span>
-            </div>
+{isProjectsPath && (
+  <>
+    <div
+      className={`${styles.navItem} ${pathname === "/projects" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/projects")}
+    >
+      <ShoppingCart size={20} className={styles.icon} />
+      <span>All Projects</span>
+    </div>
 
-            <div className={styles.navItem} onClick={() => safeNavigate("/dashboard")}>
-              ← Back to Main
-            </div>
-          </>
-        )}
+    <div
+      className={`${styles.navItem} ${pathname === "/projects/add" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/projects/add")}
+    >
+      <ShoppingCart size={20} className={styles.icon} />
+      <span>Add Project</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/projects/reports" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/projects/reports")}
+    >
+      <ShoppingCart size={20} className={styles.icon} />
+      <span>Project Reports</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/projects/archive" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/projects/archive")}
+    >
+      <ShoppingCart size={20} className={styles.icon} />
+      <span>Archived Projects</span>
+    </div>
+
+    <div className={styles.navItem} onClick={() => safeNavigate("/dashboard")}>
+      ← Back to Main
+    </div>
+  </>
+)}
+
+{!isLeadsPath && !isProjectsPath && !isUserManagementPath && (
+  <div
+    className={`${styles.navItem} ${pathname === "/users" ? styles.active : ""}`}
+    onClick={() => safeNavigate("/users")}
+  >
+    <Users size={20} className={styles.icon} />
+    <span>Employee Management</span>
+  </div>
+)}
+
+{isUserManagementPath && (
+  <>
+    <div
+      className={`${styles.navItem} ${pathname === "/users" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/users")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Employees</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/roles" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/roles")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Roles</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/profiles" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/profiles")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Profiles</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/sharing" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/sharing")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Sharing Rules</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/groups" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/groups")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Groups</span>
+    </div>
+
+    <div
+      className={`${styles.navItem} ${pathname === "/login-history" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/login-history")}
+    >
+      <Users size={20} className={styles.icon} />
+      <span>Login History</span>
+    </div>
+
+    <div className={styles.navItem} onClick={() => safeNavigate("/dashboard")}>
+      ← Back to Main
+    </div>
+  </>
+)}
       </nav>
 
       <div className={styles.divider}></div>

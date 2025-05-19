@@ -227,14 +227,28 @@ const LeadsTable = () => {
                       <td>{lead.city}</td>
                       <td>{lead.enquiry_date}</td>
                       <td>{lead.enquiry_type}</td>
-                      <td>{lead.project_status}</td>
+                      <td>
+  {lead.project_status}
+  {["Completed"].includes(lead.project_status) && (
+    <span className={styles.convertedTag}>✔ Project</span>
+  )}
+</td>
                       <td>{lead.followup1_description || '-'}</td>
                       <td>
-                        <div className={styles.actionButtons}>
-                          <button className={styles.editButton} onClick={() => handleEdit(lead)}>Edit</button>
-                          <button className={styles.deleteButton} onClick={() => handleDelete(lead._id)}>Delete</button>
-                        </div>
-                      </td>
+  <div className={styles.actionButtons}>
+    <button className={styles.editButton} onClick={() => handleEdit(lead)}>Edit</button>
+    <button className={styles.deleteButton} onClick={() => handleDelete(lead._id)}>Delete</button>
+
+    <button
+      className={styles.convertButton}
+      onClick={() => router.push(`/projects/add?leadId=${lead._id}`)}
+      title="Convert this lead into a project"
+      disabled={["Regretted", "Completed"].includes(lead.project_status)}
+    >
+      Convert to Project
+    </button>
+  </div>
+</td>
                     </tr>
                   ))
                 ) : (
