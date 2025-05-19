@@ -10,8 +10,6 @@ import axios from 'axios';
 
 export default function AddProjectPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const leadId = searchParams.get('leadId');
 
   const [activeTab, setActiveTab] = useState('basic');
   const [isLoading, setIsLoading] = useState(false);
@@ -56,34 +54,11 @@ export default function AddProjectPage() {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    const fetchLead = async () => {
-      if (!leadId) return;
-
-      try {
-        const res = await axios.get(`/api/leads/${leadId}`);
-        const lead = res.data;
-
-        setFormData((prev) => ({
-          ...prev,
-          projectName: lead.company_name || '',
-          assignedTo: lead.assigned_to || '',
-          targetDate: lead.target_date || ''
-        }));
-      } catch (err) {
-        console.error("Failed to fetch lead:", err);
-      }
-    };
-
-    fetchLead();
-  }, [leadId]);
-
   return (
     <div className={styles.clientsPage}>
       <Sidebar />
       <div className={styles.mainContent}>
         <div className={styles.contentArea}>
-
           {/* Tab Navigation */}
           <div className={styles.tabControls}>
             <button
@@ -195,7 +170,7 @@ export default function AddProjectPage() {
                     <select name="assignedTo" value={formData.assignedTo} onChange={handleChange}>
                       <option value="">-- Select Member --</option>
                       <option value="Tanvi Kadam">Tanvi Kadam</option>
-                      {/* You can map employee list here */}
+                      {/* Replace with dynamic employee list if needed */}
                     </select>
                   </label>
                 </div>
@@ -210,7 +185,6 @@ export default function AddProjectPage() {
               {isLoading ? 'Saving...' : 'Save Project'}
             </button>
           </div>
-
         </div>
       </div>
     </div>
