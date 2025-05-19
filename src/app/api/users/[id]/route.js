@@ -16,9 +16,10 @@ export async function DELETE(req, { params }) {
     if (result.deletedCount === 0) {
       return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
     }
-
-    return new Response(JSON.stringify({ message: 'User deleted' }), { status: 200 });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to delete user' }), { status: 500 });
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
+  }
+  catch (error) {
+    console.error('Error deleting user:', error);
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
   }
 }
