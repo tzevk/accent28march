@@ -6,7 +6,8 @@ export async function GET() {
     const db = client.db('CRM');
     const users = await db.collection('users').find({}).toArray();
     return new Response(JSON.stringify(users), { status: 200 });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch users' }), { status: 500 });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
   }
 }
