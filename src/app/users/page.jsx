@@ -37,7 +37,7 @@ export default function EmployeeMasterPage() {
   };
 
   const handleAddEmployee = () => {
-    router.push('/users/add');
+    router.push('/users/create');
   };
 
   useEffect(() => {
