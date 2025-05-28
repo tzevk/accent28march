@@ -5,157 +5,105 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import ProjectModal from "./ProjectModal";
 
-const ProjectTable = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+export default function ProjectTable() {
+  const [rows, setRows]   = useState([]);
+  const [loading, setL]   = useState(true);
+  const router            = useRouter();
 
-  const router = useRouter();
+  /* map doc → row */
+  const toRow = (doc) => {
+    const s = doc.Sr ?? {};
+    const pick = (k) => s[k] ?? doc[k] ?? '-';
 
-  const [newProject, setNewProject] = useState({
-    "Company Name": "",
-    "Project Description": "",
-    "Start Date": "",
-    "End Date": "",
-    "Date of Completion": "",
-    "Project Mode": ""
-  });
-
-  const fetchProjects = async () => {
-    try {
-      const response = await axios.get("/api/projects");
-
-      const mapped = response.data.map((doc) => {
-        const sr = doc.Sr || {};
-        return {
-          _id: doc._id,
-          companyName: sr["Company Name"] || "-",
-          projectName: sr["Project Description"] || "-",
-          startDate: sr["Start Date"] || "-",
-          endDate: sr["End Date"] || "-",
-          actualEndDate: sr["Date of Completion"] || "-",
-          type: sr["Project Mode"] || "-"
-        };
-      });
-
-      setProjects(mapped);
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-    } finally {
-      setLoading(false);
-    }
+    return {
+      _id         : doc._id,
+      projectId   : doc.projectId,
+      year        : pick('Year'),
+      number      : pick('Project No'),
+      company     : pick('Company Name'),
+      city        : pick('City'),
+      mode        : pick('Project Mode'),
+      start       : pick('Start Date'),
+      endPlan     : pick('End Date'),
+      endActual   : pick('Date of Completion'),
+      status      : pick('Project Status'),
+      execMode    : pick("Inhouse/ Outsource /Client's Office"),
+      outsourced  : pick('Outsorced Company'),
+      billing     : pick('Billing status'),
+      
+      remarks     : s.Remarks || '-'
+    };
   };
 
+  /* fetch */
   useEffect(() => {
-    fetchProjects();
+    (async () => {
+      try {
+        const { data } = await axios.get('/api/projects');
+        setRows(data.map(toRow));
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setL(false);
+      }
+    })();
   }, []);
 
-  const handleAddNew = () => {
-    router.push('/projects/add');
+  /* actions */
+  const add   = ()    => router.push('/projects/add');
+  const view  = (r)   => router.push(`/projects/view?projectId=${r._id}`);
+  const edit  = (r)   => router.push(`/projects/edit?projectId=${r._id}`);
+  const del   = async (id) => {
+    if (!confirm('Delete this project?')) return;
+    await axios.delete(`/api/projects/${id}`);
+    setRows(r=>r.filter(x=>x._id!==id));
   };
 
-  const handleEdit = (project) => {
-    setSelectedProject(project);
-    setNewProject({
-      "Company Name": project.companyName,
-      "Project Description": project.projectName,
-      "Start Date": project.startDate,
-      "End Date": project.endDate,
-      "Date of Completion": project.actualEndDate,
-      "Project Mode": project.type
-    });
-    setShowModal(true);
-  };
-
-  const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this project?")) {
-      try {
-        await axios.delete(`/api/projects/${id}`);
-        fetchProjects();
-      } catch (error) {
-        console.error("Error deleting project:", error);
-      }
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setNewProject({ ...newProject, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (selectedProject) {
-        await axios.put(`/api/projects/${selectedProject._id}`, newProject);
-      } else {
-        await axios.post("/api/projects", newProject);
-      }
-      setShowModal(false);
-      fetchProjects();
-    } catch (error) {
-      console.error("Error saving project:", error);
-    }
-  };
-
+  /* ui */
   return (
     <div className={styles.content}>
       <h1 className={styles.title}>Project Listing</h1>
 
       <div className={styles.filterContainer}>
-        <button className={styles.addButton} onClick={handleAddNew}>
-          ➕ Add Project
-        </button>
+        <button className={styles.addButton} onClick={add}>➕ Add Project</button>
       </div>
-
-      <ProjectModal
-        show={showModal}
-        project={newProject}
-        onChange={handleInputChange}
-        onSubmit={handleSubmit}
-        onCancel={() => setShowModal(false)}
-      />
 
       <div className={styles.tableContainer}>
         <div className={styles.scrollableTable}>
           <table className={styles.dashboardTable}>
             <thead>
               <tr>
-                <th>Sr No.</th>
-                <th>Project</th>
-                <th>Client</th>
-                <th>Start Date</th>
-                <th>Planned End</th>
-                <th>Actual End</th>
-                <th>Type</th>
-                <th>Action</th>
+                <th>Year</th><th>No.</th><th>Client</th>
+                <th>Start</th><th>Planned End</th><th>Actual End</th>
+                <th>Status</th><th>Billing</th><th>Action</th>
               </tr>
             </thead>
+
             <tbody>
               {loading ? (
-                <tr>
-                  <td colSpan="8" style={{ textAlign: "center" }}>Loading...</td>
-                </tr>
-              ) : projects.length > 0 ? (
-                projects.map((project, index) => (
-                  <tr key={project._id}>
-                    <td>{index + 1}</td>
-                    <td>{project.projectName}</td>
-                    <td>{project.companyName}</td>
-                    <td>{project.startDate}</td>
-                    <td>{project.endDate}</td>
-                    <td>{project.actualEndDate}</td>
-                    <td>{project.type}</td>
+                <tr><td colSpan="14" style={{textAlign:'center'}}>Loading…</td></tr>
+              ) : rows.length ? (
+                rows.map((r,i)=>(
+                  <tr key={r._id}>
+                    <td>{r.year}</td>
+                    <td>{r.number}</td>
+                    <td>{r.company}</td>
+                    <td>{r.start}</td>
+                    <td>{r.endPlan}</td>
+                    <td>{r.endActual}</td>
+                    <td>{r.status}</td>
+                    <td>{r.billing}</td>
                     <td>
                       <div className={styles.actionButtons}>
-                        <button className={styles.editButton} onClick={() => handleEdit(project)}>Edit</button>
-                        <button className={styles.deleteButton} onClick={() => handleDelete(project._id)}>Delete</button>
+                        <button className={styles.viewButton}   onClick={()=>view(r)}>View</button>
+                        <button className={styles.editButton}   onClick={()=>edit(r)}>Edit</button>
+                        <button className={styles.deleteButton} onClick={()=>del(r._id)}>Delete</button>
                       </div>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr><td colSpan="8" style={{ textAlign: "center" }}>No Data Available</td></tr>
+                <tr><td colSpan="14" style={{textAlign:'center'}}>No Data</td></tr>
               )}
             </tbody>
           </table>
@@ -163,6 +111,4 @@ const ProjectTable = () => {
       </div>
     </div>
   );
-};
-
-export default ProjectTable;
+}

@@ -7,184 +7,185 @@ import { useEffect } from 'react';
 import styles from "../../styles/addClient.module.css";
 import Sidebar from '../../components/Sidebar';
 import axios from 'axios'; 
+/* ---------- helper ---------- */
+const genProjectNumber = () => {
+  const y   = new Date().getFullYear();
+  const rnd = Math.floor(100 + Math.random() * 900); // 3-digit
+  return `PRJ-${y}-${rnd}`;
+};
 
+/* ---------- component ---------- */
 export default function AddProjectPage() {
   const router = useRouter();
+  const [tab , setTab ] = useState('basic');
+  const [busy, setBusy] = useState(false);
 
-  const [activeTab, setActiveTab] = useState('basic');
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    projectNumber: '',
-    projectName: '',
-    startDate: new Date().toISOString().split('T')[0],
-    endDate: '',
-    targetDate: '',
-    progress: '',
-    status: '',
-    assignedTo: ''
+  const [f, setF] = useState({
+    projectNumber : genProjectNumber(),
+
+    /* ─ basic ─ */
+    companyName   : '',
+    city          : '',
+    mode          : '',      // Awarded / New …
+    projectName   : '',
+    startDate     : new Date().toISOString().slice(0,10),
+    endDate       : '',
+    targetDate    : '',
+    completion    : '',
+
+    /* ─ status & assignment ─ */
+    progress      : '',
+    status        : '',
+    execMode      : '',      // In-house / Outsource / Client Office
+    outsourcedCo  : '',
+    billing       : '',
+    remarks       : '',
+    assignedTo    : ''
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const h = e => setF({ ...f, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  /* ---------- submit ---------- */
+  const handleSubmit = async e => {
     e.preventDefault();
-    setIsLoading(true);
-
+    setBusy(true);
     try {
-      const res = await fetch('/api/projects/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      const res   = await fetch('/api/projects/add', {
+        method : 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body   : JSON.stringify(f)
       });
-
-      if (res.ok) {
-        alert('✅ Project added successfully!');
-        router.push('/projects');
-      } else {
-        alert('❌ Failed to add project.');
-      }
+      const data  = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Save failed');
+      alert(`✅ Saved – ID ${data.projectId}`);
+      router.push('/projects');
     } catch (err) {
-      console.error('Error submitting project:', err);
-      alert('❌ Error occurred.');
+      alert(`❌ ${err.message}`);
+      console.error(err);
     }
-
-    setIsLoading(false);
+    setBusy(false);
   };
 
+  /* ---------- render ---------- */
   return (
     <div className={styles.clientsPage}>
       <Sidebar />
+
       <div className={styles.mainContent}>
         <div className={styles.contentArea}>
-          {/* Tab Navigation */}
+
+          {/* ─ tabs ─ */}
           <div className={styles.tabControls}>
-            <button
-              type="button"
-              className={activeTab === 'basic' ? styles.activeTab : ''}
-              onClick={() => setActiveTab('basic')}
-            >
-              Basic Info
-            </button>
-            <button
-              type="button"
-              className={activeTab === 'status' ? styles.activeTab : ''}
-              onClick={() => setActiveTab('status')}
-            >
-              Status & Assignment
-            </button>
+            <button onClick={()=>setTab('basic')}
+                    className={tab==='basic'?styles.activeTab:''}>Basic Info</button>
+            <button onClick={()=>setTab('status')}
+                    className={tab==='status'?styles.activeTab:''}>Status & Assignment</button>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className={styles.editForm} id="projectForm">
-            {activeTab === 'basic' && (
+          {/* ─ form ─ */}
+          <form id="projectForm" onSubmit={handleSubmit} className={styles.editForm}>
+            {tab==='basic' && (
               <div className={styles.formSection}>
                 <h4>Project Details</h4>
                 <div className={styles.formGrid}>
-                  <label>
-                    Project Number
-                    <input
-                      type="text"
-                      name="projectNumber"
-                      value={formData.projectNumber}
-                      onChange={handleChange}
-                      placeholder="e.g., PRJ-2025-001"
-                      required
-                    />
+
+                  <label>Project&nbsp;Number
+                    <input name="projectNumber" value={f.projectNumber} readOnly/>
                   </label>
-                  <label>
-                    Project Name
-                    <input
-                      type="text"
-                      name="projectName"
-                      value={formData.projectName}
-                      onChange={handleChange}
-                      placeholder="e.g., Smart Parking System"
-                      required
-                    />
+
+                  <label>Company&nbsp;Name
+                    <input name="companyName" value={f.companyName} onChange={h} required/>
                   </label>
-                  <label>
-                    Start Date
-                    <input
-                      type="date"
-                      name="startDate"
-                      value={formData.startDate}
-                      onChange={handleChange}
-                      required
-                    />
+
+                  <label>City
+                    <input name="city" value={f.city} onChange={h}/>
                   </label>
-                  <label>
-                    End Date
-                    <input
-                      type="date"
-                      name="endDate"
-                      value={formData.endDate}
-                      onChange={handleChange}
-                      min={formData.startDate}
-                      required
-                    />
+
+                  <label>Project&nbsp;Mode
+                    <select name="mode" value={f.mode} onChange={h}>
+                      <option value="">— select —</option>
+                      <option>Awarded</option><option>New</option><option>Ongoing</option>
+                    </select>
                   </label>
-                  <label>
-                    Target Date
-                    <input
-                      type="date"
-                      name="targetDate"
-                      value={formData.targetDate}
-                      onChange={handleChange}
-                      min={formData.startDate}
-                    />
+
+                  <label>Project&nbsp;Name / Description
+                    <input name="projectName" value={f.projectName} onChange={h}/>
                   </label>
+
+                  <label>Start&nbsp;Date
+                    <input type="date" name="startDate" value={f.startDate} onChange={h}/>
+                  </label>
+
+                  <label>End&nbsp;Date
+                    <input type="date" name="endDate" value={f.endDate} onChange={h}/>
+                  </label>
+
+                  <label>Date&nbsp;of&nbsp;Completion
+                    <input type="date" name="completion" value={f.completion} onChange={h}/>
+                  </label>
+
+                  <label>Target&nbsp;Date
+                    <input type="date" name="targetDate" value={f.targetDate} onChange={h}/>
+                  </label>
+
                 </div>
               </div>
             )}
 
-            {activeTab === 'status' && (
+            {tab==='status' && (
               <div className={styles.formSection}>
                 <h4>Status & Assignment</h4>
                 <div className={styles.formGrid}>
-                  <label>
-                    Progress (%)
-                    <input
-                      type="number"
-                      name="progress"
-                      min="0"
-                      max="100"
-                      value={formData.progress}
-                      onChange={handleChange}
-                      placeholder="e.g., 50"
-                    />
-                  </label>
-                  <label>
-                    Status
-                    <select name="status" value={formData.status} onChange={handleChange} required>
-                      <option value="">-- Select Status --</option>
-                      <option value="Ongoing">Ongoing</option>
-                      <option value="Completed">Completed</option>
-                      <option value="On Hold">On Hold</option>
+
+                  <label>Progress&nbsp;(%)<input name="progress" type="number"
+                         min="0" max="100" value={f.progress} onChange={h}/></label>
+
+                  <label>Status
+                    <select name="status" value={f.status} onChange={h}>
+                      <option value="">— select —</option>
+                      <option>Ongoing</option><option>Completed</option><option>On Hold</option>
                     </select>
                   </label>
-                  <label>
-                    Assigned To
-                    <select name="assignedTo" value={formData.assignedTo} onChange={handleChange}>
-                      <option value="">-- Select Member --</option>
-                      <option value="Tanvi Kadam">Tanvi Kadam</option>
-                      {/* Replace with dynamic employee list if needed */}
+
+                  <label>Execution&nbsp;Mode
+                    <select name="execMode" value={f.execMode} onChange={h}>
+                      <option value="">— select —</option>
+                      <option>In-house</option><option>Client Office</option><option>Outsource </option>
                     </select>
                   </label>
+
+                  <label>Outsourced&nbsp;Company
+                    <input name="outsourcedCo" value={f.outsourcedCo} onChange={h}/>
+                  </label>
+
+                  <label>Billing&nbsp;Status
+                    <input name="billing" value={f.billing} onChange={h}/>
+                  </label>
+
+                  <label>Remarks
+                    <textarea name="remarks" value={f.remarks} onChange={h}/>
+                  </label>
+
+                  <label>Assigned&nbsp;To
+                    <select name="assignedTo" value={f.assignedTo} onChange={h}>
+                      <option value="">— select —</option>
+                      <option>Tanvi Kadam</option>
+                    </select>
+                  </label>
+
                 </div>
               </div>
             )}
           </form>
 
-          {/* Button Row */}
+          {/* ─ buttons ─ */}
           <div className={styles.buttonRow}>
-            <button type="button" onClick={() => router.push('/projects')}>Cancel</button>
-            <button type="submit" form="projectForm" disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save Project'}
+            <button type="button" onClick={()=>router.push('/projects')}>Cancel</button>
+            <button type="submit" form="projectForm" disabled={busy}>
+              {busy?'Saving…':'Save Project'}
             </button>
           </div>
+
         </div>
       </div>
     </div>

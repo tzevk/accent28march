@@ -152,35 +152,11 @@ const Sidebar = () => {
     </div>
 
     <div
-      className={`${styles.navItem} ${pathname === "/roles" ? styles.active : ""}`}
-      onClick={() => safeNavigate("/roles")}
-    >
-      <Users size={20} className={styles.icon} />
-      <span>Roles</span>
-    </div>
-
-    <div
-      className={`${styles.navItem} ${pathname === "/profiles" ? styles.active : ""}`}
-      onClick={() => safeNavigate("/profiles")}
+      className={`${styles.navItem} ${pathname === "/profile" ? styles.active : ""}`}
+      onClick={() => safeNavigate("/profile")}
     >
       <Users size={20} className={styles.icon} />
       <span>Profiles</span>
-    </div>
-
-    <div
-      className={`${styles.navItem} ${pathname === "/sharing" ? styles.active : ""}`}
-      onClick={() => safeNavigate("/sharing")}
-    >
-      <Users size={20} className={styles.icon} />
-      <span>Sharing Rules</span>
-    </div>
-
-    <div
-      className={`${styles.navItem} ${pathname === "/groups" ? styles.active : ""}`}
-      onClick={() => safeNavigate("/groups")}
-    >
-      <Users size={20} className={styles.icon} />
-      <span>Groups</span>
     </div>
 
     <div

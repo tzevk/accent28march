@@ -139,6 +139,207 @@
   color: #86288f;
 }
 
+.roleTreeContainer {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.editButton, .deleteButton {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #218838;
+}
+
+.deleteButton:hover {
+  background-color: #b71c1c;
+}
+
+.treeContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 20px auto;
+}
+
+.roleCard {
+  background: #f9f9fc;
+  border: 1px solid #ccc;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #6A0DAD;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.roleInput {
+  border: none;
+  background: transparent;
+  text-align: center;
+  width: 100%;
+  color: #6A0DAD;
+  font-size: 1rem;
+}
+
+.viewButton {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.viewButton:hover {
+  background-color: #084298;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 82%;
+  height: 82vh;
+}
+
+.detailsWrapper {
+  max-width: 860px;      /*  reduce overall width  */
+  margin: 0 auto 60px;   /*  centre + bottom-space */
+  display: grid;
+  gap: 24px;
+}
+
+
+
+/* ---------- Project view cards ---------- */
+
+.pageTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #64126D;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 10px;
+}
+
+
+
+.detailCard {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.detailCard h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  color: #64126D;
+}
+
+.detailTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.detailTable th,
+.detailTable td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.detailTable th {
+  width: 180px;
+  color: #555;
+  font-weight: 600;
+}
+
+.detailTable td { color: #333; }
+
+.backBtn {
+  margin-top: 10px;
+  background: #64126D;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.backBtn:hover { background:#4d0e54; }
+
+@media (min-width: 900px) {           /* 2-up grid on desktop  */
+  .detailsWrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1280px) {          /* 3-up on really wide   */
+  .detailsWrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.editForm label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.editForm input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  background-color: #f5f5f5;
+}
+
 /* Filter and Search Bar */
 .filterContainer {
   display: flex;

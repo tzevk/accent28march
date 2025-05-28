@@ -30,6 +30,8 @@ export async function GET(req) {
       },
     }).sort({ createdAt: -1 }).toArray();
 
+
+
     return Response.json(leads);
   } catch (error) {
     console.error('🚨 GET Error:', error);

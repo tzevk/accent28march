@@ -1,0 +1,38 @@
+/* styles/OrgTree.css */
+.org-tree ul {
+  padding-left: 20px;
+  list-style: none;
+  position: relative;
+}
+
+.org-tree ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  border-left: 2px solid #ccc;
+  height: 100%;
+}
+
+.org-tree li {
+  padding: 6px 10px;
+  position: relative;
+}
+
+.org-tree li::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -12px;
+  border-top: 2px solid #ccc;
+  width: 12px;
+}
+
+.root {
+  background: #d64022;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}

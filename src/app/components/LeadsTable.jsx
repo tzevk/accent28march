@@ -92,6 +92,7 @@ const LeadsTable = () => {
   
     const handleInputChange = (e) => {
       setNewInquiry({ ...newInquiry, [e.target.name]: e.target.value });
+      
     };
   
     const handleSubmit = async (e) => {
@@ -132,8 +133,9 @@ const LeadsTable = () => {
     const fetchLeads = async () => {
       try {
         const response = await axios.get("/api/leads");
-        setLeads(response.data);
-        setAllLeads(response.data);
+   const ordered = [...response.data].reverse();   
+   setLeads(ordered);
+   setAllLeads(ordered);
       } catch (error) {
         console.error("Error fetching leads:", error);
       } finally {
