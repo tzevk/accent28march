@@ -6,26 +6,30 @@ import { useRouter } from 'next/navigation';
 import styles from '../../styles/leads.module.css';
 import Sidebar from '../Sidebar';
 import axios from 'axios';
-export default function ProjectView() {
-  const sp         = useSearchParams();
-  const projectId  = sp.get('projectId');
-  const [proj , setProj ] = useState(null);
-  const router     = useRouter();
 
-  /* fetch once */
+export default function ProjectView() {
+  const [proj, setProj] = useState(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get('projectId');
+
   useEffect(() => {
-    if (!projectId) return;
+    if (!projectId) {
+      router.push('/projects');
+      return;
+    }
     (async () => {
       try {
         const { data } = await axios.get(`/api/projects/${projectId}`);
         setProj(data);
-      } catch (err) {
-        console.error('Error fetching project', err);
+      } catch (e) {
+        console.error(e);
+        alert('Failed to load project details');
       }
     })();
-  }, [projectId]);
+  }, [projectId, router]);
 
-  if (!proj) return <p style={{padding:20}}>Loading…</p>;
+  if (!proj) return <p style={{ padding: 20 }}>Loading…</p>;
 
   const s = proj.Sr || {};
 
@@ -33,75 +37,98 @@ export default function ProjectView() {
     <div className={styles.dashboard}>
       <Sidebar />
       <main className={styles.content}>
-      {/* ---------- DETAILS CARDS ---------- */}
-      <div className={styles.cardsGrid /* same two-col grid */}>
-
-        {/* --- Card 1 : Basic --- */}
+        {/* ---------- DETAILS CARDS ---------- */}
         <section className={styles.card}>
           <h3>Basic Information</h3>
           <table className={styles.detailTable}>
             <tbody>
-              <tr><th>Project ID</th>      
-              <td>{proj.projectId}</td></tr>
-              <tr><th>Project No.</th>     
-              <td>{s['Project No']}</td></tr>
-              <tr><th>Project Name</th>   
-              <td>{s['Project Description']}</td></tr>
-              <tr><th>Company</th>         
-              <td>{s['Company Name']}</td></tr>
-              <tr><th>City</th>            
-              <td>{s['City']}</td></tr>
-              <tr><th>Project Mode</th>    
-              <td>{s['Project Mode']}</td></tr>
+              {[
+                { label: 'Project No.', value: s['Project No'] },
+                { label: 'Project Name', value: s['Project Description'] },
+                { label: 'Company', value: s['Company Name'] },
+                { label: 'City', value: s['City'] },
+                { label: 'Project Mode', value: s['Project Mode'] },
+              ].map(({ label, value }) => (
+                <tr key={label}>
+                  <th>{label}</th>
+                  <td>{value}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </section>
 
-        {/* --- Card 2 : Dates --- */}
+        {/* ---------- Card 2 : Dates ---------- */}
         <section className={styles.card}>
           <h3>Dates</h3>
           <table className={styles.detailTable}>
             <tbody>
-              <tr><th>Start Date</th>      <td>{s['Start Date']}</td></tr>
-              <tr><th>Planned End</th>     <td>{s['End Date']}</td></tr>
-              <tr><th>Target Date</th>     <td>{s['Target Date']}</td></tr>
-              <tr><th>Completion</th>      <td>{s['Date of Completion']}</td></tr>
+              {[
+                { label: 'Start Date', value: s['Start Date'] },
+                { label: 'Planned End', value: s['End Date'] },
+                { label: 'Target Date', value: s['Target Date'] },
+                { label: 'Completion', value: s['Date of Completion'] },
+              ].map(({ label, value }) => (
+                <tr key={label}>
+                  <th>{label}</th>
+                  <td>{value}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </section>
 
-        {/* --- Card 3 : Status --- */}
+        {/* ---------- Card 3 : Status ---------- */}
         <section className={styles.card}>
           <h3>Status &amp; Assignment</h3>
           <table className={styles.detailTable}>
             <tbody>
-              <tr><th>Status</th>          <td>{s['Project Status']}</td></tr>
-              <tr><th>Progress (%)</th>    <td>{s['Progress'] || '—'}</td></tr>
-              <tr><th>Assigned To</th>     <td>{s['Assigned To'] || '—'}</td></tr>
+              <tr>
+                <th>Status</th>
+                <td>{s['Project Status']}</td>
+              </tr>
+              <tr>
+                <th>Progress (%)</th>
+                <td>{s['Progress'] || '—'}</td>
+              </tr>
+              <tr>
+                <th>Assigned To</th>
+                <td>{s['Assigned To'] || '—'}</td>
+              </tr>
             </tbody>
           </table>
         </section>
 
-        {/* --- Card 4 : Execution --- */}
+        {/* ---------- Card 4 : Execution ---------- */}
         <section className={styles.card}>
           <h3>Execution &amp; Billing</h3>
           <table className={styles.detailTable}>
             <tbody>
-              <tr><th>Execution Mode</th>  <td>{s['Placement']}</td></tr>
-              <tr><th>Outsourced Co.</th>  <td>{s['Outsorced Company'] || '—'}</td></tr>
-              <tr><th>Billing Status</th>  <td>{s['Billing status'] || '—'}</td></tr>
-              <tr><th>Remarks</th>         <td>{s['Remarks'] || '—'}</td></tr>
+              <tr>
+                <th>Execution Mode</th>
+                <td>{s['Placement']}</td>
+              </tr>
+              <tr>
+                <th>Outsourced Co.</th>
+                <td>{s['Outsorced Company'] || '—'}</td>
+              </tr>
+              <tr>
+                <th>Billing Status</th>
+                <td>{s['Billing status'] || '—'}</td>
+              </tr>
+              <tr>
+                <th>Remarks</th>
+                <td>{s['Remarks'] || '—'}</td>
+              </tr>
             </tbody>
           </table>
         </section>
 
-      </div>{/* /cardsGrid */}
-
-      {/* ---------- actions ---------- */}
-      <div className={styles.actions}>
-        <button onClick={() => router.push('/projects')}>← Back to Projects</button>
-      </div>
-    </main>
+        {/* ---------- Actions ---------- */}
+        <div className={styles.actions}>
+          <button onClick={() => router.push('/projects')}>← Back to Projects</button>
+        </div>
+      </main>
     </div>
   );
 }

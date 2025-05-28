@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from '../styles/leads.module.css';
-import Sidebar from '../components/Sidebar';
+import Sidebar from './Sidebar';
 import axios from 'axios';
 
 export default function EditProjectPage() {
