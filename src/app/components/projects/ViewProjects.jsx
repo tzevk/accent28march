@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/leads.module.css';
-import Sidebar from '../components/Sidebar';
+import styles from '../../styles/leads.module.css';
+import Sidebar from '../Sidebar';
 import axios from 'axios';
 export default function ProjectView() {
   const sp         = useSearchParams();

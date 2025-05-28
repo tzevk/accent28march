@@ -1,9 +1,8 @@
 'use client';
 import React from 'react';
-
 import Sidebar from '../../components/Sidebar';
 import styles  from '../../styles/leads.module.css';
-import ViewProject from '../../components/ViewProjects';
+import ViewProject from '../../components/projects/ViewProjects';
 
 export default function ViewProjectPage() {
   return (
