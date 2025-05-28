@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from '../styles/login.module.css';
+import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
   const router             = useRouter();
@@ -17,35 +18,25 @@ export default function LoginPage() {
 
     const email    = e.target.email.value.trim();
     const password = e.target.password.value.trim();
-    const role     = e.target.role.value;
+    const role = e.target.role.value.toUpperCase();
+    
 
-    try {
-      const res = await fetch('/api/auth/login', {
-        method : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body   : JSON.stringify({ email, password, role }),   // 👈 pass role too
-        credentials: 'include'                                // receive cookie
-      });
+const result = await signIn('credentials', {
+  redirect: false,
+  email,
+  password,
+  role,
+});
 
-      const body = await res.json();
-
-      if (!res.ok) {
-        setError(body.error || 'Login failed');
-      } else {
-        /* ---------- optional localStorage backup ---------- */
-        // localStorage.setItem('token', body.token); // token now in cookie
-        localStorage.setItem('role', body.role);
-
-        /* ---------- role-based redirect ---------- */
-        if (body.role === 'admin')            router.push('/dashboard');
-        else if (body.role === 'project manager')
-                                              router.push('/dashboard/manager');
-        else                                  router.push('/dashboard/user');
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Something went wrong.');
+    if (result.error) {
+      setError(result.error);
+    } else {
+      const roleStored = localStorage.getItem('role');
+      if (roleStored === 'admin') router.push('/dashboard');
+      else if (roleStored === 'project manager') router.push('/dashboard/manager');
+      else router.push('/dashboard/user');
     }
+
     setLoad(false);
   }
 
@@ -76,12 +67,12 @@ export default function LoginPage() {
 
           <div className={styles.inputGroup}>
             <label>Role</label>
-            <select name="role" required defaultValue="">
-              <option value="" disabled>Select Role</option>
-              <option value="admin">Admin</option>
-              <option value="project manager">Project Manager</option>
-              <option value="user">User</option>
-            </select>
+<select name="role" required defaultValue="">
+  <option value="" disabled>Select Role</option>
+  <option value="ADMIN">Admin</option>
+  <option value="PROJECT MANAGER">Project Manager</option>
+  <option value="USER">User</option>
+</select>
           </div>
 
           <button type="submit" disabled={loading} className={styles.button}>
