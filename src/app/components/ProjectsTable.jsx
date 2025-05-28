@@ -95,7 +95,6 @@ export default function ProjectTable() {
                     <td>{r.billing}</td>
                     <td>
                       <div className={styles.actionButtons}>
-                        <button className={styles.viewButton}   onClick={()=>view(r)}>View</button>
                         <button className={styles.editButton}   onClick={()=>edit(r)}>Edit</button>
                         <button className={styles.deleteButton} onClick={()=>del(r._id)}>Delete</button>
                       </div>
