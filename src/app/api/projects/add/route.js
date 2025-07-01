@@ -22,6 +22,7 @@ export async function POST(req) {
       "Inhouse/ Outsource /Client's Office": body.execMode     ?? '',
       "Outsorced Company"    : body.outsourcedCo   ?? '',
       "Billing status"       : body.billing        ?? null,
+      "Manpower"             : body.manpower       ?? null,
       "Year"                 : `${new Date().getFullYear()}-${(
                                  new Date().getFullYear() + 1
                                ).toString().slice(-2)}`

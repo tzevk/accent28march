@@ -7,11 +7,11 @@ export default function LeadsPage() {
   return (
     <div className={styles.dashboard}>
       <Sidebar />
-      <main className={styles.mainContent}>
-        <div className="p-6">
+      <div className={styles.mainContent}>
+        <main className={styles.content}>
           <LeadsTable />
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

@@ -40,7 +40,8 @@ export default function AddProjectPage() {
     outsourcedCo  : '',
     billing       : '',
     remarks       : '',
-    assignedTo    : ''
+    assignedTo    : '',
+    manpower      : ''
   });
 
   const h = e => setF({ ...f, [e.target.name]: e.target.value });
@@ -127,6 +128,17 @@ export default function AddProjectPage() {
                   <label>Target&nbsp;Date
                     <input type="date" name="targetDate" value={f.targetDate} onChange={h}/>
                   </label>
+
+                  <label>Manpower
+  <input
+    type="number"
+    name="manpower"
+    value={f.manpower}
+    onChange={h}
+    min="0"
+    placeholder="e.g., 25"
+  />
+</label>
 
                 </div>
               </div>

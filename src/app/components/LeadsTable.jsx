@@ -4,6 +4,22 @@ import axios from "axios";
 import LeadModal from "../components/LeadModal";
 import AddInquiryModal from "../components/AddInquiryModal";
 import { useRouter } from "next/navigation";
+import { 
+  Search, 
+  Plus, 
+  Edit3, 
+  Trash2, 
+  ArrowRight, 
+  Filter,
+  Building2,
+  MapPin,
+  Calendar,
+  FileText,
+  Activity,
+  MessageSquare,
+  CheckCircle,
+  RefreshCw
+} from "lucide-react";
 
 const LeadsTable = () => {
     const [leads, setLeads] = useState([]);
@@ -149,34 +165,73 @@ const LeadsTable = () => {
     }, []);
   
     return (
-      <div className={styles.content}>
-        <h1 className={styles.title}>Inquiry Listing</h1>
-        <div className={styles.filterContainer}>
-          <select
-            className={styles.filterDropdown}
-            value={filterField}
-            onChange={(e) => setFilterField(e.target.value)}
-          >
-            <option value="">Select Search Field</option>
-            <option value="company_name">Company Name</option>
-            <option value="type">Type</option>
-            <option value="city">City</option>
-            <option value="enquiry_type">Enquiry Type</option>
-            <option value="project_status">Project Status</option>
-          </select>
-  
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Enter search keyword..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-  
-          <div className={styles.searchContainer}>
-            <button className={styles.addButton} onClick={handleSearch}>🔍 Search</button>
+      <div className={styles.container}>
+        {/* Header Section */}
+        <div className={styles.header}>
+          <div className={styles.headerLeft}>
+            <h1 className={styles.title}>Lead Management</h1>
+            <p className={styles.subtitle}>Track and manage your sales inquiries</p>
           </div>
-          <button className={styles.addButton} onClick={handleAddNew}>➕ Add Inquiry</button>
+          <div className={styles.headerActions}>
+            <button className={styles.addButton} onClick={handleAddNew}>
+              <Plus size={20} />
+              <span>Add Inquiry</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Filters Section */}
+        <div className={styles.filtersCard}>
+          <div className={styles.filterRow}>
+            <div className={styles.filterGroup}>
+              <Filter size={18} className={styles.filterIcon} />
+              <select
+                className={styles.filterDropdown}
+                value={filterField}
+                onChange={(e) => setFilterField(e.target.value)}
+              >
+                <option value="">All Fields</option>
+                <option value="company_name">Company Name</option>
+                <option value="type">Type</option>
+                <option value="city">City</option>
+                <option value="enquiry_type">Enquiry Type</option>
+                <option value="project_status">Project Status</option>
+              </select>
+            </div>
+
+            <div className={styles.searchGroup}>
+              <Search size={18} className={styles.searchIcon} />
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Search leads..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button className={styles.searchButton} onClick={handleSearch}>
+                Search
+              </button>
+            </div>
+          </div>
+          
+          <div className={styles.statsRow}>
+            <div className={styles.statItem}>
+              <span className={styles.statValue}>{leads.length}</span>
+              <span className={styles.statLabel}>Total Leads</span>
+            </div>
+            <div className={styles.statItem}>
+              <span className={styles.statValue}>
+                {leads.filter(lead => lead.project_status === "Completed").length}
+              </span>
+              <span className={styles.statLabel}>Converted</span>
+            </div>
+            <div className={styles.statItem}>
+              <span className={styles.statValue}>
+                {leads.filter(lead => lead.project_status === "Under Discussion").length}
+              </span>
+              <span className={styles.statLabel}>In Progress</span>
+            </div>
+          </div>
         </div>
   
         <AddInquiryModal
@@ -201,60 +256,165 @@ const LeadsTable = () => {
           companies={companies}
         />
   
-        <div className={styles.tableContainer}>
-          <div className={styles.scrollableTable}>
-            <table className={styles.dashboardTable}>
+        {/* Table Section */}
+        <div className={styles.tableCard}>
+          <div className={styles.tableContainer}>
+            <table className={styles.modernTable}>
               <thead>
                 <tr>
-                  <th>Sr No.</th>
-                  <th>Company</th>
-                  <th>Type</th>
-                  <th>City</th>
-                  <th>Enquiry Date</th>
-                  <th>Enquiry Type</th>
-                  <th>Project Status</th>
-                  <th>Follow-up</th>
-                  <th>Action</th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <span>#</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <Building2 size={16} />
+                      <span>Company</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <FileText size={16} />
+                      <span>Type</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <MapPin size={16} />
+                      <span>City</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <Calendar size={16} />
+                      <span>Enquiry Date</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <MessageSquare size={16} />
+                      <span>Enquiry Type</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <Activity size={16} />
+                      <span>Status</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <MessageSquare size={16} />
+                      <span>Follow-up</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className={styles.tableHeader}>
+                      <span>Actions</span>
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <tr><td colSpan="9" style={{ textAlign: 'center' }}>Loading...</td></tr>
+                  <tr>
+                    <td colSpan="9" className={styles.loadingCell}>
+                      <div className={styles.loadingContent}>
+                        <RefreshCw size={20} className={styles.spinner} />
+                        <span>Loading leads...</span>
+                      </div>
+                    </td>
+                  </tr>
                 ) : leads.length > 0 ? (
                   leads.map((lead, index) => (
-                    <tr key={lead._id}>
-                      <td>{lead.sr_no || index + 1}</td>
-                      <td>{lead.company_name}</td>
-                      <td>{lead.type}</td>
-                      <td>{lead.city}</td>
-                      <td>{lead.enquiry_date}</td>
-                      <td>{lead.enquiry_type}</td>
-                      <td>
-  {lead.project_status}
-  {["Completed"].includes(lead.project_status) && (
-    <span className={styles.convertedTag}>✔ Project</span>
-  )}
-</td>
-                      <td>{lead.followup1_description || '-'}</td>
-                      <td>
-  <div className={styles.actionButtons}>
-    <button className={styles.editButton} onClick={() => handleEdit(lead)}>Edit</button>
-    <button className={styles.deleteButton} onClick={() => handleDelete(lead._id)}>Delete</button>
-
-    <button
-      className={styles.convertButton}
-      onClick={() => router.push(`/projects/add?leadId=${lead._id}`)}
-      title="Convert this lead into a project"
-      disabled={["Regretted", "Completed"].includes(lead.project_status)}
-    >
-      Convert to Project
-    </button>
-  </div>
-</td>
+                    <tr key={lead._id} className={styles.tableRow}>
+                      <td className={styles.indexCell}>
+                        <span className={styles.indexNumber}>{lead.sr_no || index + 1}</span>
+                      </td>
+                      <td className={styles.companyCell}>
+                        <div className={styles.companyInfo}>
+                          <Building2 size={16} className={styles.cellIcon} />
+                          <span className={styles.companyName}>{lead.company_name}</span>
+                        </div>
+                      </td>
+                      <td className={styles.typeCell}>
+                        <span className={styles.typeTag}>{lead.type}</span>
+                      </td>
+                      <td className={styles.cityCell}>
+                        <div className={styles.cityInfo}>
+                          <MapPin size={14} className={styles.cellIcon} />
+                          <span>{lead.city}</span>
+                        </div>
+                      </td>
+                      <td className={styles.dateCell}>
+                        <div className={styles.dateInfo}>
+                          <Calendar size={14} className={styles.cellIcon} />
+                          <span>{new Date(lead.enquiry_date).toLocaleDateString('en-GB')}</span>
+                        </div>
+                      </td>
+                      <td className={styles.enquiryTypeCell}>
+                        <span className={styles.enquiryTag}>{lead.enquiry_type}</span>
+                      </td>
+                      <td className={styles.statusCell}>
+                        <div className={styles.statusWrapper}>
+                          <span className={`${styles.statusTag} ${styles[`status${lead.project_status?.replace(/\s+/g, '')}`]}`}>
+                            {lead.project_status}
+                          </span>
+                          {["Completed"].includes(lead.project_status) && (
+                            <span className={styles.convertedBadge}>
+                              <CheckCircle size={12} />
+                              Project
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className={styles.followupCell}>
+                        <div className={styles.followupText}>
+                          {lead.followup1_description || <span className={styles.noData}>No follow-up</span>}
+                        </div>
+                      </td>
+                      <td className={styles.actionsCell}>
+                        <div className={styles.actionButtons}>
+                          <button 
+                            className={styles.editButton} 
+                            onClick={() => handleEdit(lead)}
+                            title="Edit lead details"
+                            aria-label="Edit lead"
+                          >
+                            <Edit3 size={18} />
+                          </button>
+                          <button 
+                            className={styles.deleteButton} 
+                            onClick={() => handleDelete(lead._id)}
+                            title="Delete this lead"
+                            aria-label="Delete lead"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                          <button
+                            className={`${styles.convertButton} ${["Regretted", "Completed"].includes(lead.project_status) ? styles.disabled : ''}`}
+                            onClick={() => router.push(`/projects/add?leadId=${lead._id}`)}
+                            title={["Regretted", "Completed"].includes(lead.project_status) ? "Cannot convert this lead" : "Convert to project"}
+                            disabled={["Regretted", "Completed"].includes(lead.project_status)}
+                          >
+                            <ArrowRight size={16} />
+                            <span>Convert</span>
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="9" style={{ textAlign: 'center' }}>No Data Available</td></tr>
+                  <tr>
+                    <td colSpan="9" className={styles.emptyState}>
+                      <div className={styles.emptyContent}>
+                        <FileText size={48} className={styles.emptyIcon} />
+                        <h3>No leads found</h3>
+                        <p>Start by adding your first lead or try adjusting your search filters.</p>
+                      </div>
+                    </td>
+                  </tr>
                 )}
               </tbody>
             </table>
