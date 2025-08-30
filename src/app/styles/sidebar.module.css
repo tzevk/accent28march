@@ -1,160 +1,158 @@
 /* Sidebar Container */
 .sidebar {
-    width: 260px;
-    height: 100vh;
-    background: white;
-    padding: 20px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .userSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 15px;
-  }
-  
-  .userLogo {
-    width: 55px;
-    height: 55px;
-    background: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    margin-top: 25px;
-  }
-  
-  .userIcon {
-    color: #470057;
-  }
-  
-  .username {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    margin-top: 10px;
-  }
-  
-  .primaryNav {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .navItem {
-    padding: 14px 15px;
-    text-decoration: none;
-    color: #707070;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .icon {
-    color: #707070;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .active {
-    background: #470057;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .active .icon {
-    color: white;
-  }
-  
-  .navItem:hover {
-    background: #470057;
-    color: white;
-  }
-  
-  .navItem:hover .icon {
-    color: white;
-  }
-  
-  .logout {
-    margin-top: auto;
-    color: #ff4d4d;
-    font-weight: bold;
-  }
-  
-  .logout:hover {
-    background: rgba(255, 77, 77, 0.1);
-    color: #ff4d4d;
-  }
-  
-  .subMenu {
-    padding-left: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 6px;
-  }
-  
-  .subMenu a {
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #707070;
-    padding: 8px 12px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  
-  .subMenu a.active {
-    background-color: #470057;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .subMenu a:hover {
-    background-color: #470057;
-    color: white;
-  }
-  
-  .dropdownWrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .navLinkFull {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 15px;
-    text-decoration: none;
-    color: #707070;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .linkContent {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .arrowIcon {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-  }
-  
-  
-  
+  width: 260px;
+  height: 100vh;
+  background: white;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.userSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.userLogo {
+  width: 55px;
+  height: 55px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 25px;
+}
+
+.userIcon {
+  color: #470057;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-top: 10px;
+}
+
+.primaryNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navItem {
+  padding: 14px 15px;
+  text-decoration: none;
+  color: #707070;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  color: #707070;
+  transition: color 0.3s ease-in-out;
+}
+
+.active {
+  background: #470057;
+  color: white;
+  font-weight: bold;
+}
+
+.active .icon {
+  color: white;
+}
+
+.navItem:hover {
+  background: #470057;
+  color: white;
+  cursor: pointer;
+}
+
+.navItem:hover .icon {
+  color: white;
+}
+
+.logout {
+  margin-top: auto;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.logout:hover {
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff4d4d;
+}
+
+.subMenu {
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.subMenu a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #707070;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.subMenu a.active {
+  background-color: #470057;
+  color: white;
+  font-weight: bold;
+}
+
+.subMenu a:hover {
+  background-color: #470057;
+  color: white;
+}
+
+.dropdownWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.navLinkFull {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 15px;
+  text-decoration: none;
+  color: #707070;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.linkContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arrowIcon {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
